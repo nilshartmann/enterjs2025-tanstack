@@ -24,9 +24,7 @@ function CardItem({ card }: CardItemProps) {
     <div className={"CardItem"}>
       <div className={"flex items-center justify-between space-x-8"}>
         <img src={`/images/${card.image}`} alt={card.title} />
-        <Link to={"/cards/$cardId"} params={{ cardId: card.id }}>
-          <h2>{card.title}</h2>
-        </Link>
+        <h2>{card.title}</h2>
       </div>
       <LikesWidget cardId={card.id} currentLikes={card.likes} />
     </div>

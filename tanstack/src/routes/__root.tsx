@@ -1,6 +1,10 @@
-import { createRootRouteWithContext, redirect } from "@tanstack/react-router";
-// import "../globals.css";
-import globalsCss from "../globals.css?url";
+import {
+  createRootRouteWithContext,
+  redirect,
+  retainSearchParams,
+} from "@tanstack/react-router";
+import "../globals.css";
+// import globalsCss from "../globals.css?url";
 import type { QueryClient } from "@tanstack/react-query";
 import SpaRootComponent from "@/components/layout/SpaRootComponent.tsx";
 import SsrRootComponent from "@/components/layout/SsrRootComponent.tsx";
@@ -10,6 +14,10 @@ interface MyRouterContext {
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  search: {
+    middlewares: [retainSearchParams(true)],
+  },
+
   loader: ({ location }) => {
     if (location.pathname === "/") {
       throw redirect({ to: "/cards" });
@@ -34,7 +42,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
     links: [
-      { href: globalsCss, rel: "stylesheet" },
+      // { href: globalsCss, rel: "stylesheet" },
       { href: "/fonts/google-fonts.css", rel: "stylesheet" },
       { href: "/fonts/google-fonts.css", rel: "stylesheet" },
       { href: "/fontawesome/css/fontawesome.css", rel: "stylesheet" },
@@ -44,5 +52,5 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     ],
   }),
 
-  component: SsrRootComponent,
+  component: SpaRootComponent,
 });

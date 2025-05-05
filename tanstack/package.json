@@ -4,19 +4,19 @@
   "type": "module",
   "scripts": {
     "backend": "cd ../backend && pnpm start",
+    "spa:dev": "vite --port 3000",
+    "ssr:dev": "vinxi dev",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "check": "tsc --noEmit && pnpm prettier:check && eslint",
+    "spa:build-serve": "rm -rf dist/ && vite build && tsc && vite preview --port 3000",
+    "spa:build": "vite build && tsc",
+    "spa:serve": "vite preview",
     "start": "vinxi start",
     "build": "vinxi build",
     "serve": "vite preview",
     "test": "vitest run",
-    "lint": "eslint",
-    "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write .",
-    "check": "tsc --noEmit && pnpm prettier:check && eslint",
-    "ssr:dev": "vinxi dev",
-    "spa:dev": "vite --port 3000",
-    "spa:build-serve": "rm -rf dist/ && vite build && tsc && vite preview --port 3000",
-    "spa:build": "vite build && tsc",
-    "spa:serve": "vite preview"
+    "lint": "eslint"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",

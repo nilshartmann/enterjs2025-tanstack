@@ -7,6 +7,8 @@ type CardDetailProps = {
   card: CardDto;
 };
 export default function CardDetail({ card }: CardDetailProps) {
+  const showComments = false;
+
   return (
     <div
       className={
@@ -15,8 +17,7 @@ export default function CardDetail({ card }: CardDetailProps) {
     >
       <Card {...card} />
 
-      {/*// WHAT HAPPENS IF THE CALL IN COMMENT LIST TAKES LONG*/}
-      <CommentList cardId={card.id} />
+      {showComments && <CommentList cardId={card.id} />}
     </div>
   );
 }

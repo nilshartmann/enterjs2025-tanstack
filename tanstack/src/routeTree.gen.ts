@@ -13,7 +13,6 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as EditorIndexImport } from './routes/editor/index'
 import { Route as CardsIndexImport } from './routes/cards/index'
-import { Route as CardsCardIdIndexImport } from './routes/cards/$cardId/index'
 
 // Create/Update Routes
 
@@ -26,12 +25,6 @@ const EditorIndexRoute = EditorIndexImport.update({
 const CardsIndexRoute = CardsIndexImport.update({
   id: '/cards/',
   path: '/cards/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CardsCardIdIndexRoute = CardsCardIdIndexImport.update({
-  id: '/cards/$cardId/',
-  path: '/cards/$cardId/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,13 +46,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EditorIndexImport
       parentRoute: typeof rootRoute
     }
-    '/cards/$cardId/': {
-      id: '/cards/$cardId/'
-      path: '/cards/$cardId'
-      fullPath: '/cards/$cardId'
-      preLoaderRoute: typeof CardsCardIdIndexImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -68,41 +54,36 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/cards': typeof CardsIndexRoute
   '/editor': typeof EditorIndexRoute
-  '/cards/$cardId': typeof CardsCardIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/cards': typeof CardsIndexRoute
   '/editor': typeof EditorIndexRoute
-  '/cards/$cardId': typeof CardsCardIdIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/cards/': typeof CardsIndexRoute
   '/editor/': typeof EditorIndexRoute
-  '/cards/$cardId/': typeof CardsCardIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/cards' | '/editor' | '/cards/$cardId'
+  fullPaths: '/cards' | '/editor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/cards' | '/editor' | '/cards/$cardId'
-  id: '__root__' | '/cards/' | '/editor/' | '/cards/$cardId/'
+  to: '/cards' | '/editor'
+  id: '__root__' | '/cards/' | '/editor/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   CardsIndexRoute: typeof CardsIndexRoute
   EditorIndexRoute: typeof EditorIndexRoute
-  CardsCardIdIndexRoute: typeof CardsCardIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   CardsIndexRoute: CardsIndexRoute,
   EditorIndexRoute: EditorIndexRoute,
-  CardsCardIdIndexRoute: CardsCardIdIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,8 +97,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/cards/",
-        "/editor/",
-        "/cards/$cardId/"
+        "/editor/"
       ]
     },
     "/cards/": {
@@ -125,9 +105,6 @@ export const routeTree = rootRoute
     },
     "/editor/": {
       "filePath": "editor/index.tsx"
-    },
-    "/cards/$cardId/": {
-      "filePath": "cards/$cardId/index.tsx"
     }
   }
 }

@@ -1,1 +1,1 @@
-export const showQueryDevTools = true;
+export const showQueryDevTools = false;

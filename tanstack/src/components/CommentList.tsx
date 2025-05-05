@@ -11,18 +11,7 @@ export default function CommentList({ cardId }: CommentListProps) {
   return (
     <div className={"CommentList"}>
       <h1>Comments</h1>
-      {/*
-
-         LOOK AT INDEX.HTML:
-           - LOADING INDICATOR IS SSR-ED!!
-           - DATA SENT LATER ("STREAMING")
-
-      */}
-      <Suspense
-        fallback={<LoadingIndicator>Loading Comments....</LoadingIndicator>}
-      >
-        <CommentListView cardId={cardId} />
-      </Suspense>
+      <CommentListView cardId={cardId} />
     </div>
   );
 }
@@ -30,8 +19,8 @@ export default function CommentList({ cardId }: CommentListProps) {
 type CommentListViewProps = {
   cardId: string;
 };
+
 function CommentListView({ cardId }: CommentListViewProps) {
-  // WHAT HAPPENS IF THIS TAKES LONG?
   const { data: comments } = useSuspenseQuery(fetchCommentsOpts(cardId));
 
   return comments.map((c) => (

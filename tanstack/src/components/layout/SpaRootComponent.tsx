@@ -4,13 +4,17 @@ import NavBar from "@/components/NavBar.tsx";
 import { showQueryDevTools } from "@/demo-config.ts";
 
 export default function SpaRootComponent() {
+  const showNavBar = false;
+
   return (
     <>
       <HeadContent />
       <>
-        <header>
-          <NavBar />
-        </header>
+        {showNavBar && (
+          <header>
+            <NavBar />
+          </header>
+        )}
         <Outlet />
         {showQueryDevTools && <ReactQueryDevtools />}
       </>
