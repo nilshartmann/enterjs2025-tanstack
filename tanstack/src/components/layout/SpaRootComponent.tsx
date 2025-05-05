@@ -4,7 +4,7 @@ import NavBar from "@/components/NavBar.tsx";
 import { showQueryDevTools } from "@/demo-config.ts";
 
 export default function SpaRootComponent() {
-  const showNavBar = false;
+  const showNavBar = true;
 
   return (
     <>
