@@ -1,0 +1,312 @@
+/* NOTE: */
+/* this CSS code is in NO WAY BEST PRACTICES */
+/* it is optimized for our training use-case */
+/* */
+/* Tailwinds "@apply" directive: https://tailwindcss.com/docs/functions-and-directives#apply-directive */
+@import "tailwindcss";
+@import "../public/fonts/google-fonts.css";
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 767px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1100px;
+}
+
+@theme inline {
+  --font-roboto-slab: "Roboto Slab", var(--font-sans);
+  --font-open-sans: "Open Sans", var(--font-sans);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  body {
+    @apply font-open-sans overflow-y-scroll text-teal-900;
+  }
+}
+
+@layer components {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h2 {
+    @apply text-lg font-bold;
+  }
+
+  a {
+    @apply cursor-pointer text-teal-900 underline underline-offset-2;
+  }
+
+  a:hover {
+    @apply text-amber-700;
+  }
+
+  button {
+    @apply inline-flex cursor-pointer self-center rounded-lg border-0 bg-amber-500 px-2 py-1 text-stone-100 hover:bg-amber-600;
+  }
+
+  button:hover,
+  a {
+    @apply border-amber-500;
+  }
+  button:disabled {
+    @apply border-amber-500 bg-gray-300 hover:cursor-default hover:bg-gray-300;
+  }
+
+  form {
+    @apply flex flex-col gap-y-8 rounded-lg border-2 p-4;
+  }
+
+  form > button[type="submit"] {
+    @apply self-start p-2 text-xl;
+  }
+
+  label {
+    @apply flex flex-col gap-y-2;
+  }
+
+  /*probably not semantically correct, but works for our case*/
+  label:has(input[type="checkbox"]) {
+    @apply flex flex-none flex-row-reverse items-center justify-end;
+  }
+
+  input[type="checkbox"] {
+    @apply me-2;
+  }
+
+  input,
+  textarea {
+    @apply rounded-lg border px-2 py-2;
+  }
+
+  .CardImage {
+    @apply relative w-48 border-4 border-white;
+  }
+
+  .CardImageDecoration img {
+    @apply border-4 border-lime-600;
+  }
+
+  .CardImage img {
+    @apply h-full rounded-lg;
+  }
+
+  .CardImageCaption {
+    @apply absolute bottom-2 left-1/2 -translate-x-1/2 transform rounded bg-black/50 px-2 py-1 text-center text-xs text-white;
+  }
+
+  .CardImageSelector {
+    @apply flex space-x-4;
+  }
+
+  /*.CardImageSelector button {*/
+  /*  @apply inline-flex self-center rounded-lg border-0 bg-amber-500 text-stone-100 hover:bg-amber-600;*/
+  /*}*/
+
+  .CardImageSelector button:disabled {
+    @apply bg-stone-100 text-stone-500 hover:bg-stone-100;
+  }
+
+  .CardImageSelectorImage {
+    @apply cursor-pointer rounded-lg border-2 border-white p-0.5;
+  }
+
+  button.CardImageSelectorImage {
+    @apply bg-white;
+  }
+
+  button.CardImageSelectorImage:hover {
+    @apply border-rose-300;
+  }
+  button.CardImageSelectorImage.selected {
+    @apply border-indigo-500;
+  }
+
+  .CardList {
+    @apply flex flex-col items-center gap-y-4;
+  }
+
+  /*.Card {*/
+  /*  @apply flex w-[40rem] items-start gap-x-4 rounded-lg border border-stone-200 p-4;*/
+  /*}*/
+
+  /*.Card a {*/
+  /*  @apply self-start;*/
+  /*}*/
+
+  /*.Card p {*/
+  /*  @apply max-w-72;*/
+  /*}*/
+
+  .CardDisplay {
+    @apply mt-8 flex w-full flex-col items-center justify-center gap-y-8 rounded-lg border-2 border-stone-200 p-8;
+  }
+  .CardDisplay img {
+    @apply w-[40rem];
+  }
+  .CardDisplay h2 {
+    @apply text-4xl;
+  }
+  .CardDisplay p {
+    @apply text-2xl italic;
+  }
+
+  .ImageChooser {
+    @apply flex max-w-48 gap-x-4;
+  }
+
+  .ImageChooser img {
+    @apply cursor-pointer border-8 border-transparent hover:border-amber-400;
+  }
+
+  .ImageChooser .ChooserButtons {
+    @apply flex items-center justify-between;
+  }
+
+  /*.ImageChooser img {*/
+  /*  @apply max-w-40;*/
+  /*}*/
+
+  .CardList {
+    @apply flex flex-col items-start space-y-4;
+  }
+
+  .CardList .CardItem {
+    @apply flex w-full items-center justify-between space-x-8 rounded-2xl border border-gray-300 p-8;
+  }
+
+  .CardList img {
+    @apply max-h-24;
+  }
+
+  .CommentList {
+    @apply mt-12 flex w-full flex-col items-center space-y-8 rounded-2xl border-2 border-stone-200 p-8;
+  }
+
+  .CommentItem {
+    @apply flex items-start space-x-4 rounded-2xl border-2 border-stone-200 p-4 shadow-lg;
+  }
+}
+
+/* Spinner CSS taken from: http://tobiasahlin.com/spinkit/ */
+.Spinner {
+  /* teal-800 */
+  --color-text: #115e59;
+  /* teal-50  */
+  --color-light: #f0fdfa;
+  margin: auto 0;
+  width: 100%;
+  font-size: 3rem;
+  text-align: center;
+  /*padding: 0 2rem 1rem 2rem;*/
+}
+
+.Spinner.secondary {
+  padding: 0;
+  font-size: 1rem;
+}
+
+.Spinner h1 {
+  font-family:
+    barlow, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.Spinner > .dummy {
+  width: 1.2em;
+  height: 1.2em;
+
+  /*background-color: var(--color-text);*/
+
+  border-radius: 100%;
+  display: inline-block;
+}
+
+.Spinner > .bounce {
+  width: 1.2em;
+  height: 1.2em;
+
+  /*background-color: var(--color-text);*/
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.Spinner > .bounce:not(:last-child) {
+  margin-right: 1.2em;
+}
+
+.Spinner > .bounce.fill {
+  width: 2rem;
+  height: 2rem;
+
+  background-color: var(--color-text);
+  /*font-size: 1rem;*/
+}
+
+.Spinner.secondary > .bounce,
+.Spinner.secondary > .dummy {
+  width: 1rem;
+  height: 1rem;
+}
+
+.Spinner.secondary > .bounce.fill {
+  font-size: 1rem;
+
+  background-color: var(--color-light);
+}
+
+.Spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.Spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.Spinner.secondary .bounce3 {
+  margin-right: 0;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
