@@ -15,7 +15,7 @@ export const fetchCardDetailOpts = (cardId: string) =>
     async queryFn() {
       console.log("fetchCardDetailOpts", cardId);
       const r = await ky
-        .get(`http://localhost:7100/api/cards/${cardId}?slow=125`)
+        .get(`http://localhost:7100/api/cards/${cardId}?slow=1250`)
         .json();
       return CardDto.parse(r);
     },
