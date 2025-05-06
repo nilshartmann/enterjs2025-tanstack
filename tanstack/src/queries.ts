@@ -27,12 +27,12 @@ export const fetchCommentsOpts = (cardId: string) =>
     async queryFn() {
       const r = await ky
 
-        // Jetzt dauert auch das Laden der Kommentare langsam,
-        //   -> da wir kein SUSPENSE Boundary haben, wird die globale
-        //      Pending Component angezeigt
-        //      - wir wollen aber nicht auf die Kommentare warten,
-        //        deswegen Suspense Komponente
-        .get(`http://localhost:7100/api/cards/${cardId}/comments?slow=2000`)
+        // Jetzt dauert das Laden GENAUSO LANGE, wie das Laden der
+        //    CardDetail-Daten
+        //    - Trotzdem wird die Suspense-Fallback-Komponente für die Kommentare
+        //      angezeigt 🤔
+        //      -> weil die Daten NACHEINANDER geladen werden
+        .get(`http://localhost:7100/api/cards/${cardId}/comments?slow=1250`)
         .json();
       return CommentDtoList.parse(r);
     },
