@@ -1,4 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { fetchCardDetailOpts } from "@/queries.ts";
+import CardDetail from "@/components/CardDetail.tsx";
 
 export const Route = createFileRoute("/cards/$cardId/")({
   component: RouteComponent,
@@ -6,5 +9,8 @@ export const Route = createFileRoute("/cards/$cardId/")({
 
 function RouteComponent() {
   const cardId = Route.useParams().cardId;
-  return <div>Hello Card {cardId}</div>;
+
+  const { data: card } = useSuspenseQuery(fetchCardDetailOpts(cardId));
+
+  return <CardDetail card={card} />;
 }
