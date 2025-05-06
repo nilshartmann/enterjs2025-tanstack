@@ -16,6 +16,19 @@ export const Route = createFileRoute("/cards/$cardId/")({
 
   // "Problem": jetzt wird die pendingComponent SSR'ed
   pendingComponent: LoadingIndicator,
+
+  loader({ context, params }) {
+    // Jetzt wartet der Server bis das Promise aufgelöst ist,
+    // und der Artikel wird SSR'ed
+    //
+    //  - Dank Suspense in CommentList wird _nicht_ auf die
+    //    Kommentare gewartet
+    //  - Kommentare werden gestreamed
+    //  - Aber: Wasserfall
+    return context.queryClient.ensureQueryData(
+      fetchCardDetailOpts(params.cardId),
+    );
+  },
 });
 
 function RouteComponent() {
