@@ -24,6 +24,20 @@ export default function CardDetail({ card }: CardDetailProps) {
     >
       <Card {...card} />
 
+      {/*
+        Beim klicken auf den Link wird nur diese Komponente neu gerendert!
+
+        Achtung! Developer Tools zeigen das falsch an
+          In NavBar.tsx logging hinzufügen um das zu sehen
+        */}
+      <Link
+        to={"/cards/$cardId"}
+        params={{ cardId: card.id }}
+        search={{ showComments: !showComments }}
+      >
+        Toggle/Hide comments
+      </Link>
+
       {showComments && <CommentList cardId={card.id} />}
     </div>
   );
