@@ -9,15 +9,35 @@ const ky = _ky.extend({
   timeout: 30000,
 });
 
+const loadCardDetail = createServerFn({
+  method: "GET",
+})
+  .validator((data) => {
+    if (typeof data === "string") {
+      return data;
+    }
+
+    throw new Error("Invalid data.");
+  })
+  .handler(async ({ data: cardId }) => {
+    // Request wird nun im Server ausgeführt!
+    const r = await ky
+      .get(`http://localhost:7100/api/cards/${cardId}?slow=1250`)
+      .json();
+    return CardDto.parse(r);
+  });
+
 export const fetchCardDetailOpts = (cardId: string) =>
   queryOptions({
     queryKey: ["cards", "detail", cardId],
     async queryFn() {
       console.log("fetchCardDetailOpts", cardId);
-      const r = await ky
-        .get(`http://localhost:7100/api/cards/${cardId}?slow=1250`)
-        .json();
-      return CardDto.parse(r);
+
+      // Das Laden der Daten findet jetzt IMMER
+      // auf dem Server statt,
+      // die Daten landen aber trotzdem im Query CACHE
+
+      return loadCardDetail({ data: cardId });
     },
   });
 
