@@ -11,7 +11,20 @@ export default function CommentList({ cardId }: CommentListProps) {
   return (
     <div className={"CommentList"}>
       <h1>Comments</h1>
-      <CommentListView cardId={cardId} />
+      {/*
+
+      Mit dieser "Sollbruch-Stelle" wird auf dem Server nur bis zur
+      Suspense-Boundary gerendert.
+        - SSR'ed wird dann der Platzhalter (für uns OK, weil die Kommentare
+          eine niedrigere Priorität als der Rest der Seite haben)
+
+        - DIE FERTIG GERENDERTE (!!!) CommentList wird nachgeschickt
+      */}
+      <Suspense
+        fallback={<LoadingIndicator>Loading comments</LoadingIndicator>}
+      >
+        <CommentListView cardId={cardId} />
+      </Suspense>
     </div>
   );
 }

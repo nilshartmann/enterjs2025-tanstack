@@ -26,7 +26,13 @@ export const fetchCommentsOpts = (cardId: string) =>
     queryKey: ["cards", "detail", cardId, "comments"],
     async queryFn() {
       const r = await ky
-        .get(`http://localhost:7100/api/cards/${cardId}/comments`)
+
+        // Jetzt dauert auch das Laden der Kommentare langsam,
+        //   -> da wir kein SUSPENSE Boundary haben, wird die globale
+        //      Pending Component angezeigt
+        //      - wir wollen aber nicht auf die Kommentare warten,
+        //        deswegen Suspense Komponente
+        .get(`http://localhost:7100/api/cards/${cardId}/comments?slow=2000`)
         .json();
       return CommentDtoList.parse(r);
     },
