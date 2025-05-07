@@ -50,4 +50,4 @@ declare module "@tanstack/react-router" {
 }
 
 // Create a new router instance
-export const createRouter = createSpaRouter;
+export const createRouter = createSsrRouter;

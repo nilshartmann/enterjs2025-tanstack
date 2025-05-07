@@ -3,8 +3,8 @@ import {
   redirect,
   retainSearchParams,
 } from "@tanstack/react-router";
-import "../globals.css";
-// import globalsCss from "../globals.css?url";
+// import "../globals.css";
+import globalsCss from "../globals.css?url";
 import type { QueryClient } from "@tanstack/react-query";
 import SpaRootComponent from "@/components/layout/SpaRootComponent.tsx";
 import SsrRootComponent from "@/components/layout/SsrRootComponent.tsx";
@@ -42,7 +42,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
     links: [
-      // { href: globalsCss, rel: "stylesheet" },
+      { href: globalsCss, rel: "stylesheet" },
       { href: "/fonts/google-fonts.css", rel: "stylesheet" },
       { href: "/fonts/google-fonts.css", rel: "stylesheet" },
       { href: "/fontawesome/css/fontawesome.css", rel: "stylesheet" },
@@ -52,5 +52,5 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     ],
   }),
 
-  component: SpaRootComponent,
+  component: SsrRootComponent,
 });

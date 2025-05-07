@@ -11,7 +11,9 @@ export default function CommentList({ cardId }: CommentListProps) {
   return (
     <div className={"CommentList"}>
       <h1>Comments</h1>
-      <CommentListView cardId={cardId} />
+      <Suspense fallback={<LoadingIndicator />}>
+        <CommentListView cardId={cardId} />
+      </Suspense>
     </div>
   );
 }
